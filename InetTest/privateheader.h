@@ -13,22 +13,40 @@
 #include <sys/param.h>
 #include <sys/queue.h>
 #include <sys/socket.h>
-#include "socketvar.h"
 #include <sys/sysctl.h>
 
-#include "route.h"
 #include <netinet/in.h>
 #include <netinet/in_systm.h>
 #include <netinet/ip.h>
 #ifdef INET6
 #include <netinet/ip6.h>
 #endif /* INET6 */
+#include <netinet/tcp.h>
+
+#if TARGET_IPHONE_SIMULATOR
+#include <sys/socketvar.h>
+#include <net/route.h>
+#include <netinet/in_pcb.h>
+#include <netinet/ip_icmp.h>
+#include <netinet/icmp_var.h>
+#include <netinet/igmp_var.h>
+#include <netinet/ip_var.h>
+#include <netinet/tcp.h>
+#include <netinet/tcpip.h>
+#include <netinet/tcp_seq.h>
+#define TCPSTATES
+#include <netinet/tcp_fsm.h>
+#include <netinet/tcp_var.h>
+#include <netinet/udp.h>
+#include <netinet/udp_var.h>
+#else
+#include "socketvar.h"
+#include "route.h"
 #include "in_pcb.h"
 #include "ip_icmp.h"
 #include "icmp_var.h"
 #include "igmp_var.h"
 #include "ip_var.h"
-#include <netinet/tcp.h>
 #include "tcpip.h"
 #include "tcp_seq.h"
 #define TCPSTATES
@@ -36,6 +54,7 @@
 #include "tcp_var.h"
 #include "udp.h"
 #include "udp_var.h"
+#endif
 
 #include <arpa/inet.h>
 #include <err.h>
@@ -47,7 +66,6 @@
 #include <string.h>
 #include <unistd.h>
 #include "netstat.h"
-#include "in_pcb.h"
 
 
 #define ROUNDUP64(a) \

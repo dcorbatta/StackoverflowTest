@@ -13,3 +13,8 @@ InetTest
 ========
 Solution to Hisenberg's question:
 - 1. Network Activity Monitoring on iPhone: http://stackoverflow.com/questions/19977759/network-activity-monitoring-on-iphone
+
+CppWrapper
+========
+Solution to tmighty's question:
+- 1. VS2012 C++ to XCode: http://stackoverflow.com/questions/20337207/vs2012-c-to-xcode
